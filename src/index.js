@@ -7,53 +7,48 @@
  */
 
 import React, {Component} from 'react';
-import {Appbar, Paragraph, Searchbar} from 'react-native-paper';
+import {connect} from 'react-redux';
+import SearchPage from './pages/search-page';
+import MedicationView from './pages/medication-view';
 import {View} from 'react-native';
-import styles from './styles';
+import {BottomNavigation} from 'react-native-paper';
 
-export default class App extends Component {
-  _goBack = () => console.log('Went back');
+const mapStateToProps = state => {
+  return {};
+};
 
-  _handleSearch = () => this.setState({isSearchEnabled: true});
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 
-  _handleMore = () => console.log('Shown more');
-
+class App extends Component {
   state = {
-    isSearchEnabled: false,
-    firstQuery: '',
+    index: 0,
+    routes: [
+      {key: 'search', title: 'Search', icon: 'magnify'},
+      {key: 'logMedication', title: 'Log Meds', icon: 'clipboard-text'},
+    ],
   };
+
+  _handleIndexChange = index => this.setState({index});
+
+  _renderScene = BottomNavigation.SceneMap({
+    search: SearchPage,
+    logMedication: MedicationView,
+  });
 
   render() {
     return (
-      <View>
-        <Appbar.Header>
-          {/* <Searchbar
-            placeholder="Search groups or items"
-            style={styles.search}
-            onChangeText={query => {
-              setUserData(query);
-            }}
-            value={userData}
-          /> */}
-          {this.state.isSearchEnabled && (
-            <Searchbar
-              placeholder="Search"
-              icon="arrow-left"
-              onIconPress={() => {
-                this.setState({isSearchEnabled: false});
-              }}
-            />
-          )}
-
-          {/* <Searchbar placeholder="Search" icon="arrow-left" /> */}
-          <Appbar.Content title="NutriDatabase" />
-          <Appbar.Action icon="magnify" onPress={this._handleSearch} />
-          <Appbar.Action icon="dots-vertical" onPress={this._handleMore} />
-        </Appbar.Header>
-        <View style={styles.row}>
-          <Paragraph>Left icon</Paragraph>
-        </View>
-      </View>
+      <BottomNavigation
+        navigationState={this.state}
+        onIndexChange={this._handleIndexChange}
+        renderScene={this._renderScene}
+      />
     );
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);

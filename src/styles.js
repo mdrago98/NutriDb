@@ -14,16 +14,22 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
+  fab: {
+    position: 'absolute',
+    right: 16,
+    bottom: 28,
+  },
+  content: {
+    padding: 8,
+  },
+  card: {
+    margin: 4,
+  },
   bottom: {
     position: 'absolute',
     left: 0,
     right: 0,
     bottom: 0,
-  },
-  fab: {
-    position: 'absolute',
-    right: 16,
-    bottom: 28,
   },
 });
 

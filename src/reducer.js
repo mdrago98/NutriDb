@@ -1,31 +1,50 @@
-export const GET_REPOS = 'my-awesome-app/repos/LOAD';
-export const GET_REPOS_SUCCESS = 'my-awesome-app/repos/LOAD_SUCCESS';
-export const GET_REPOS_FAIL = 'my-awesome-app/repos/LOAD_FAIL';
+import {
+  QUERY_FOOD,
+  TOGGLE_SEARCH,
+  UPDATE_QUERY,
+  QUERY_FOOD_SUCCESS,
+  QUERY_FOOD_FAIL,
+  GET_DETAILS_SUCCESS,
+} from './action-types.js';
 
-export default function reducer(state = {repos: []}, action) {
+// export default function reducer(state = {repos: []}, action) {
+//   return null;
+// }
+const initialState = {
+  food: [],
+  isSearchEnabled: false,
+  query: '',
+  foodDetails: {},
+};
+
+export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case GET_REPOS:
-      return {...state, loading: true};
-    case GET_REPOS_SUCCESS:
-      return {...state, loading: false, repos: action.payload.data};
-    case GET_REPOS_FAIL:
+    case QUERY_FOOD:
+      return {...state, isSearchEnabled: false};
+    case QUERY_FOOD_SUCCESS:
+      return {...state, isSearchEnabled: false, food: action.foods};
+    case QUERY_FOOD_FAIL:
+      console.log(action.error);
       return {
         ...state,
-        loading: false,
-        error: 'Error while fetching repositories',
+        isSearchEnabled: false,
+        error: action.error,
+        causedBy: action.previousAction,
+      };
+    case TOGGLE_SEARCH:
+      return {...state, isSearchEnabled: true};
+    case UPDATE_QUERY:
+      return {
+        ...state,
+        query: action.query,
+      };
+    case GET_DETAILS_SUCCESS:
+      console.log('action food details' + action.foodDetails);
+      return {
+        ...state,
+        foodDetails: action.foodDetails,
       };
     default:
-      return state;
+      return {...state};
   }
-}
-
-export function search_food(food_query) {
-  return {
-    type: GET_REPOS,
-    payload: {
-      request: {
-        url: `/users/${food_query}/repos`,
-      },
-    },
-  };
 }
