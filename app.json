@@ -1,4 +1,5 @@
 {
   "name": "NutriDb",
-  "displayName": "NutriDb"
+  "displayName": "NutriDb",
+  "senderID": "YOUR-GCM-ID"
 }

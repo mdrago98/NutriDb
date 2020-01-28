@@ -4,6 +4,7 @@ import {
   QUERY_FOOD_SUCCESS,
   QUERY_FOOD_FAIL,
   GET_DETAILS_SUCCESS,
+  SAVE_EVENT,
 } from './action-types.js';
 import axios from 'axios';
 
@@ -76,6 +77,17 @@ export function updateDetailedFoodState(response, fdcId) {
       foodClass: response.data.foodClass,
       publicationDate: response.data.publicationDate,
       nutrients: response.data.foodNutrients,
+    },
+  };
+}
+
+export function saveEvent(event) {
+  return {
+    type: SAVE_EVENT,
+    event: {
+      eventType: event.eventType,
+      timeOfEvent: event.timeOfEvent,
+      description: event.description || '',
     },
   };
 }

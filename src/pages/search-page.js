@@ -30,7 +30,7 @@ class SearchPage extends Component {
     return (
       <View>
         {/* <Appbar /> */}
-        <View style={styles.row}>
+        <View style={styles.inputContainerStyle}>
           <Searchbar
             placeholder="Search food"
             style={styles.search}

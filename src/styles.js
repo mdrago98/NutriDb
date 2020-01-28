@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: 8,
     paddingHorizontal: 16,
@@ -30,6 +29,36 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+  },
+  wrapper: {
+    flex: 1,
+  },
+  inputContainerStyle: {
+    margin: 8,
+  },
+  search: {
+    margin: 4,
+  },
+  timelineContainer: {
+    flex: 1,
+    padding: 20,
+    paddingTop: 35,
+    backgroundColor: 'white',
+  },
+  list: {
+    flex: 1,
+    marginTop: 20,
+  },
+  centerItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  timeStyle: {
+    textAlign: 'center',
+    backgroundColor: '#ff9797',
+    color: 'white',
+    padding: 5,
+    borderRadius: 13,
   },
 });
 

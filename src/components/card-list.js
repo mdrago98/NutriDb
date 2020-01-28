@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {ScrollView} from 'react-native';
-import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
+import {Card, Paragraph} from 'react-native-paper';
 import {connect} from 'react-redux';
 import styles from '../styles';
 import {withNavigation} from 'react-navigation';

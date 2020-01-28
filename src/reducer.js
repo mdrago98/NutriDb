@@ -5,16 +5,15 @@ import {
   QUERY_FOOD_SUCCESS,
   QUERY_FOOD_FAIL,
   GET_DETAILS_SUCCESS,
+  SAVE_EVENT,
 } from './action-types.js';
 
-// export default function reducer(state = {repos: []}, action) {
-//   return null;
-// }
 const initialState = {
   food: [],
   isSearchEnabled: false,
   query: '',
   foodDetails: {},
+  events: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -43,6 +42,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         foodDetails: action.foodDetails,
+      };
+    case SAVE_EVENT:
+      return {
+        ...state,
+        events: [...state.events, action.event],
       };
     default:
       return {...state};

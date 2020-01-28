@@ -6,7 +6,8 @@ import 'react-native-gesture-handler';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import SearchDetail from './src/pages/search-detail';
-import MedicationView from './src/pages/medication-entry';
+import MedicationView from './src/pages/medication-view';
+import MedicationEntry from './src/components/medication-entry';
 import {PersistGate} from 'redux-persist/integration/react';
 import {store, persistor} from './src/store-config';
 
@@ -15,6 +16,7 @@ let RootStack = createStackNavigator(
     Search: App,
     Details: SearchDetail,
     MedicationView: MedicationView,
+    MedicationEntry: MedicationEntry,
   },
   {
     mode: 'modal',
@@ -48,7 +50,6 @@ export default function Main() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <PaperProvider theme={theme}>
-          {/* <StatusBar barStyle="light-content" backgroundColor="#6a51ae" /> */}
           <AppContainer />
         </PaperProvider>
       </PersistGate>

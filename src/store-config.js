@@ -5,17 +5,11 @@ import thunk from 'redux-thunk';
 import reducer from './reducer';
 
 const persistConfig = {
-  key: 'medication',
+  key: 'root',
   storage: AsyncStorage,
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
-
-// export default () => {
-//   let store = createStore(persistedReducer, applyMiddleware(thunk));
-//   let persistor = persistStore(store);
-//   return {store, persistor};
-// };
 
 export let store = createStore(persistedReducer, applyMiddleware(thunk));
 export let persistor = persistStore(store);

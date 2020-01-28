@@ -5,6 +5,7 @@ import {DataTable, Appbar} from 'react-native-paper';
 import styles from '../styles';
 import {connect} from 'react-redux';
 import {withNavigation} from 'react-navigation';
+import ModalHeader from '../components/modal-header';
 
 const mapStateToProps = state => {
   return {
@@ -13,14 +14,12 @@ const mapStateToProps = state => {
     title: state.foodDetails.description || '',
     nutrients:
       (state.foodDetails.nutrients && [
-        state.foodDetails.nutrients &&
-          state.foodDetails.nutrients
-            .filter(nut => nut.nutrient.name === 'Copper, Cu')
-            .shift(),
-        ...(state.foodDetails.nutrients &&
-          state.foodDetails.nutrients.filter(
-            nut => nut.nutrient.name !== 'Copper, Cu',
-          )),
+        ...state.foodDetails.nutrients.filter(
+          nut => nut.nutrient.name === 'Copper, Cu',
+        ),
+        ...state.foodDetails.nutrients.filter(
+          nut => nut.nutrient.name !== 'Copper, Cu',
+        ),
       ]) ||
       [],
   };
@@ -42,7 +41,7 @@ class SearchDetail extends Component {
     const {navigation} = this.props;
     return (
       <View>
-        <Appbar.Header>
+        {/* <Appbar.Header>
           <Appbar.BackAction
             icon="delete"
             onPress={() => navigation.navigate('Search', {})}
@@ -51,7 +50,12 @@ class SearchDetail extends Component {
             title={navigation.getParam('title', 'Details')}
             subtitle={navigation.getParam('itemId', 'id')}
           />
-        </Appbar.Header>
+        </Appbar.Header> */}
+        <ModalHeader
+          onBack={() => navigation.navigate('Search', {})}
+          title={navigation.getParam('title', 'Details')}
+          subtitle={navigation.getParam('itemId', 'id')}
+        />
         <ScrollView
           styles={styles.container}
           contentContainerStyle={styles.content}>
@@ -61,15 +65,17 @@ class SearchDetail extends Component {
               <DataTable.Title numeric>Amount</DataTable.Title>
               <DataTable.Title>Unit</DataTable.Title>
             </DataTable.Header>
-            {this.props.nutrients.map((nut, key) => {
-              return (
-                <DataTable.Row key={key}>
-                  <DataTable.Cell>{nut.nutrient.name}</DataTable.Cell>
-                  <DataTable.Cell numeric>{nut.amount}</DataTable.Cell>
-                  <DataTable.Cell>{nut.nutrient.unitName}</DataTable.Cell>
-                </DataTable.Row>
-              );
-            })}
+            {this.props.nutrients
+              .filter(nut => nut.nutrient)
+              .map((nut, key) => {
+                return (
+                  <DataTable.Row key={key}>
+                    <DataTable.Cell>{nut.nutrient.name}</DataTable.Cell>
+                    <DataTable.Cell numeric>{nut.amount}</DataTable.Cell>
+                    <DataTable.Cell>{nut.nutrient.unitName}</DataTable.Cell>
+                  </DataTable.Row>
+                );
+              })}
           </DataTable>
         </ScrollView>
       </View>
